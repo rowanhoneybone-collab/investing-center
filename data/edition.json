@@ -1,0 +1,13 @@
+{
+  "generatedAt": null,
+  "config": {"markets": [], "holdings": [], "companies": []},
+  "markets": [],
+  "quotes": {},
+  "marketNews": [],
+  "companyNews": {},
+  "companyIntelligence": {},
+  "catalysts": [],
+  "earnings": [],
+  "dividends": [],
+  "rates": {"treasury": {}, "fed": {}, "marketHeadlines": []}
+}
