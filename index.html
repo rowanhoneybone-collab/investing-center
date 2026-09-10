@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Investing Center — personal market intelligence built around Market Espresso." />
+  <title>Investing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<div class="app-shell">
+  <header>
+    <div class="eyebrow-row">
+      <span id="todayDate">Investing Center</span>
+      <span class="edition">PERSONAL MARKET INTELLIGENCE</span>
+      <button id="refreshButton" class="dark-button">↻ Refresh</button>
+    </div>
+
+    <div class="brand-row">
+      <div>
+        <small>Market Espresso inside. Research around it.</small>
+        <h1>INVESTING CENTER</h1>
+      </div>
+      <div class="brew-status">
+        <span>TODAY'S BREW</span>
+        <b id="marketMood">Loading…</b>
+        <small id="publishedAt">Reading latest edition</small>
+      </div>
+    </div>
+
+    <nav id="mainNav">
+      <button class="active" data-tab="today">Today</button>
+      <button data-tab="portfolio">Portfolio</button>
+      <button data-tab="companies">Companies</button>
+      <button data-tab="catalysts">Catalysts</button>
+      <button data-tab="markets">Markets</button>
+      <button data-tab="sectors">Sectors</button>
+      <button data-tab="rates">Fed & Bonds</button>
+      <button data-tab="dividends">Dividends</button>
+    </nav>
+
+    <div id="dataStatus" class="data-status loading">
+      <b>Loading Investing Center…</b>
+      <span>Reading the latest edition published by GitHub Actions.</span>
+    </div>
+    <div class="ticker" id="ticker"></div>
+  </header>
+
+  <main>
+    <section id="today" class="tab active">
+      <div class="section-head hero-head">
+        <div><label>MARKET ESPRESSO</label><h2>Your market morning, distilled.</h2></div>
+        <p>A fast read of markets, rates, your portfolio and the catalysts that matter next.</p>
+      </div>
+
+      <div class="today-grid">
+        <article class="lead-story">
+          <label>THE BIG STORY</label>
+          <h3 id="leadHeadline">Brewing the latest edition…</h3>
+          <p class="lead-copy" id="leadSummary">Loading the freshest market headline.</p>
+          <div class="why-box"><b>Why it matters</b><p id="leadWhy">Market Espresso will connect the headline to rates, sectors and your holdings.</p></div>
+        </article>
+        <aside class="five-things">
+          <label>5 THINGS TO KNOW</label>
+          <div id="fiveThings"></div>
+        </aside>
+      </div>
+
+      <div class="rule"></div>
+      <div class="snapshot-grid" id="todaySnapshot"></div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><div><label>UP NEXT</label><h3>Near-term catalysts.</h3></div><button class="text-button" data-jump="catalysts">Open calendar →</button></div>
+          <div id="todayCatalysts"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><label>PORTFOLIO PULSE</label><h3>Your biggest moves.</h3></div><button class="text-button" data-jump="portfolio">Open portfolio →</button></div>
+          <div id="todayPortfolio"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="tab">
+      <div class="section-head"><div><label>PORTFOLIO</label><h2>Your money, in context.</h2></div><p>Price moves matter most when they change the underlying business thesis.</p></div>
+      <div class="card-grid" id="portfolioCards"></div>
+    </section>
+
+    <section id="companies" class="tab">
+      <div class="section-head"><div><label>COMPANY INTELLIGENCE</label><h2>Research the business, not just the ticker.</h2></div><p>Business model, valuation, quality metrics, earnings, catalysts, peers and current headlines in one research sheet.</p></div>
+      <div class="company-toolbar">
+        <div class="search-box"><span>⌕</span><input id="companySearch" type="search" placeholder="Search company or ticker — e.g. OXY, NVIDIA, Tempus" autocomplete="off" /></div>
+        <div class="company-count" id="companyCount">Loading companies…</div>
+      </div>
+      <div id="companyDetail" class="company-detail hidden"></div>
+      <div class="company-grid" id="companyGrid"></div>
+    </section>
+
+    <section id="catalysts" class="tab">
+      <div class="section-head"><div><label>CATALYST CALENDAR</label><h2>Know what could move markets next.</h2></div><p>Earnings, portfolio dividends, FOMC meetings, inflation, jobs, GDP/PCE and energy inventory reports.</p></div>
+      <div class="catalyst-summary" id="catalystSummary"></div>
+      <div class="filter-row" id="catalystFilters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="portfolio">My Portfolio</button>
+        <button data-filter="earnings">Earnings</button>
+        <button data-filter="macro">Macro + Fed</button>
+        <button data-filter="energy">Energy</button>
+      </div>
+      <div id="catalystCalendar"></div>
+    </section>
+
+    <section id="markets" class="tab">
+      <div class="section-head"><div><label>MARKETS</label><h2>The tape without the noise.</h2></div><p>Broad U.S. market direction plus the latest macro and market-moving headlines.</p></div>
+      <div class="market-grid" id="marketCards"></div>
+      <div class="panel news-panel"><div class="panel-head"><div><label>MARKET HEADLINES</label><h3>What traders are reacting to.</h3></div></div><div id="marketHeadlines"></div></div>
+    </section>
+
+    <section id="sectors" class="tab">
+      <div class="section-head"><div><label>SECTOR RADAR</label><h2>Know the competitive landscape.</h2></div><p>Your holdings remain the anchor, but the radar shows the companies shaping each industry around them.</p></div>
+      <div id="sectorGroups"></div>
+    </section>
+
+    <section id="rates" class="tab">
+      <div class="section-head"><div><label>FED & BONDS</label><h2>Rates desk.</h2></div><p>Official Fed policy, Treasury yields, curve shape and the latest rates headlines—translated into plain English.</p></div>
+      <div class="rate-summary" id="rateSummary"></div>
+      <div class="two-col">
+        <div class="panel"><label>U.S. TREASURY CURVE</label><h3>Rates across maturities.</h3><div class="curve-grid" id="yieldCurve"></div></div>
+        <div class="panel"><label>MARKET ESPRESSO READ</label><h3>What the numbers mean.</h3><div id="rateRead"></div></div>
+      </div>
+      <div class="panel news-panel"><div class="panel-head"><div><label>FED & RATES HEADLINES</label><h3>What could change rate expectations.</h3></div></div><div id="ratesHeadlines"></div></div>
+    </section>
+
+    <section id="dividends" class="tab">
+      <div class="section-head"><div><label>DIVIDENDS</label><h2>Income events on the calendar.</h2></div><p>Upcoming ex-dividend dates for your tracked holdings, connected directly to the Catalyst Calendar.</p></div>
+      <div id="dividendCards" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Investing Center • Market Espresso</span>
+    <span>Research and education only — not investment advice.</span>
+  </footer>
+</div>
+<script src="./app.js"></script>
+</body>
+</html>
